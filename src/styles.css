@@ -31,16 +31,16 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
   background-color: #eaeaea;
-  padding: 5px;
+  padding: 10px;
 }
 
 .top-bar #categoryBtn {
-  background-color: #fd3d03;
+  background-color: #ff6f00;
   color: #fff;
   border: none;
-  padding: 8px 30px;
+  padding: 8px 20px;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -234,20 +234,21 @@ header {
 }
 
 .add-to-cart {
-  background-color: #fd3d03;
+  background: linear-gradient(90deg, #007bab, #00aaff); /* من الأحمر البرتقالي لـ برتقالي أفتح */
   border: none;
   color: white;
   padding: 4px 20px;
-  margin-top: auto; /* مهم: يجعل الزر في أسفل البطاقة */
+  margin-top: auto;
   cursor: pointer;
   border-radius: 5px;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease;
   font-size: 15px;
 }
 
 .add-to-cart:hover {
-  background-color: #007bab;
+  background: linear-gradient(90deg, #fd3d03, #ff6f00); /* من أزرق غامق لأزرق فاتح */
 }
+
 
 /* القائمة الجانبية للفئات */
 .category-menu {
