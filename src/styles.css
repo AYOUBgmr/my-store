@@ -31,16 +31,16 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   background-color: #eaeaea;
-  padding: 10px;
+  padding: 5px;
 }
 
 .top-bar #categoryBtn {
   background-color: #fd3d03;
   color: #fff;
   border: none;
-  padding: 8px 20px;
+  padding: 8px 30px;
   border-radius: 5px;
   cursor: pointer;
 }
