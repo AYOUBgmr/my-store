@@ -40,7 +40,7 @@ header {
   background-color: #ff6f00;
   color: #fff;
   border: none;
-  padding: 8px 20px;
+  padding: 8px 25px;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -237,7 +237,7 @@ header {
   background: linear-gradient(90deg, #007bab, #00aaff); /* من الأحمر البرتقالي لـ برتقالي أفتح */
   border: none;
   color: white;
-  padding: 4px 20px;
+  padding: 1px 20px;
   margin-top: auto;
   cursor: pointer;
   border-radius: 5px;
