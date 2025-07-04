@@ -234,7 +234,7 @@ header {
 }
 
 .add-to-cart {
-  background: linear-gradient(90deg, #007bab, #00aaff); /* من الأحمر البرتقالي لـ برتقالي أفتح */
+  background: linear-gradient(90deg, #c42e00, #ff6f00); /* من الأحمر البرتقالي لـ برتقالي أفتح */
   border: none;
   color: white;
   padding: 1px 20px;
@@ -246,7 +246,7 @@ header {
 }
 
 .add-to-cart:hover {
-  background: linear-gradient(90deg, #fd3d03, #ff6f00); /* من أزرق غامق لأزرق فاتح */
+  background: linear-gradient(90deg, #09729b, #00aaff); /* من أزرق غامق لأزرق فاتح */
 }
 
 
