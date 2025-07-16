@@ -1,4 +1,6 @@
-const TopBar = ({
+import React from "react";
+
+const TopBar = React.memo(({
   searchTerm,
   setSearchTerm,
   toggleCategoryMenu,
@@ -30,6 +32,6 @@ const TopBar = ({
       </div>
     )}
   </nav>
-);
+));
 
 export default TopBar;

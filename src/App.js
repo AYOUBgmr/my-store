@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import Header from "./components/Header.js";
 import TopBar from "./components/TopBar.js";
 import CartIcon from "./components/CartIcon.js";
@@ -9,7 +9,6 @@ import "./styles.css";
 
 function App() {
   const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [cart, setCart] = useState({});
   const [cartVisible, setCartVisible] = useState(false);
@@ -23,14 +22,14 @@ function App() {
       .then((data) => {
         const prods = parseCSV(data);
         setProducts(prods);
-        setFilteredProducts(prods);
         const cats = [...new Set(prods.map((p) => p.category.trim()).filter(c => c !== ""))];
         setCategories(cats);
       })
       .catch((err) => console.error("Failed to load CSV:", err));
   }, []);
 
-  useEffect(() => {
+  // استخدم useMemo لتقليل عمليات الفلترة الثقيلة
+  const filteredProducts = useMemo(() => {
     let filtered = products;
     if (selectedCategory !== "All items") {
       filtered = filtered.filter((p) => p.category.trim() === selectedCategory);
@@ -40,10 +39,11 @@ function App() {
         p.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-    setFilteredProducts(filtered);
-  }, [searchTerm, selectedCategory, products]);
+    return filtered;
+  }, [products, selectedCategory, searchTerm]);
 
-  const addToCart = (product) => {
+  // دوال cart محسنة باستخدام useCallback لتجنب إعادة إنشائها
+  const addToCart = useCallback((product) => {
     setCart((prevCart) => {
       const newCart = { ...prevCart };
       if (newCart[product.name]) {
@@ -53,9 +53,9 @@ function App() {
       }
       return newCart;
     });
-  };
+  }, []);
 
-  const updateCartItem = (name, action) => {
+  const updateCartItem = useCallback((name, action) => {
     setCart((prevCart) => {
       const newCart = { ...prevCart };
       if (!newCart[name]) return prevCart;
@@ -72,14 +72,15 @@ function App() {
       }
       return newCart;
     });
-  };
+  }, []);
 
-  const totalPrice = Object.entries(cart).reduce(
-    (sum, [name, item]) => sum + item.price * item.quantity,
-    0
-  );
+  const totalPrice = useMemo(() =>
+    Object.entries(cart).reduce(
+      (sum, [_, item]) => sum + item.price * item.quantity,
+      0
+    ), [cart]);
 
-  const orderViaWhatsApp = () => {
+  const orderViaWhatsApp = useCallback(() => {
     if (Object.keys(cart).length === 0) {
       alert("السلة فارغة!");
       return;
@@ -87,7 +88,7 @@ function App() {
     const msg = formatWhatsAppMessage(cart, totalPrice);
     const url = `https://wa.me/212601171498?text=${encodeURIComponent(msg)}`;
     window.open(url, "_blank");
-  };
+  }, [cart, totalPrice]);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -114,14 +115,14 @@ function App() {
       <TopBar
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        toggleCategoryMenu={() => setCategoryMenuVisible(!categoryMenuVisible)}
+        toggleCategoryMenu={() => setCategoryMenuVisible((v) => !v)}
         categoryMenuVisible={categoryMenuVisible}
         categories={categories}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
       <div className="container">
-        <CartIcon cart={cart} toggleCart={() => setCartVisible(!cartVisible)} />
+        <CartIcon cart={cart} toggleCart={() => setCartVisible((v) => !v)} />
         <Cart
           cart={cart}
           visible={cartVisible}

@@ -1,4 +1,6 @@
-const Cart = ({ cart, visible, totalPrice, updateCartItem, orderViaWhatsApp }) => (
+import React from "react";
+
+const Cart = React.memo(({ cart, visible, totalPrice, updateCartItem, orderViaWhatsApp }) => (
   <div id="cart" className={`cart ${visible ? "" : "hidden"}`}>
     <h2>
       <img
@@ -10,7 +12,9 @@ const Cart = ({ cart, visible, totalPrice, updateCartItem, orderViaWhatsApp }) =
     <ul id="cartItems">
       {Object.keys(cart).length === 0 && <li>السلة فارغة</li>}
       {Object.entries(cart).map(([name, item]) => {
-        const displayName = name.split(" ").length > 3 ? name.split(" ").slice(0, 3).join(" ") + "..." : name;
+        const displayName = name.split(" ").length > 3
+          ? name.split(" ").slice(0, 3).join(" ") + "..."
+          : name;
         return (
           <li key={name}>
             <div className="product-info">
@@ -32,6 +36,6 @@ const Cart = ({ cart, visible, totalPrice, updateCartItem, orderViaWhatsApp }) =
       أرسل الطلب عبر WhatsApp
     </button>
   </div>
-);
+));
 
 export default Cart;

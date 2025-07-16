@@ -1,4 +1,6 @@
-const CartIcon = ({ cart, toggleCart }) => (
+import React from "react";
+
+const CartIcon = React.memo(({ cart, toggleCart }) => (
   <div className="cart-icon" id="cartIcon" onClick={toggleCart}>
     <span className="cart-count" id="cartCount">
       {Object.values(cart).reduce((sum, item) => sum + item.quantity, 0)}
@@ -8,6 +10,6 @@ const CartIcon = ({ cart, toggleCart }) => (
       alt="cart"
     />
   </div>
-);
+));
 
 export default CartIcon;
