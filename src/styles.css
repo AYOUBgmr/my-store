@@ -76,12 +76,12 @@ header {
   border-radius: 4px;
   white-space: nowrap;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.7s;
   font-size: 14px;
 }
 
 .category-item.active {
-  background-color: #007bff;
+  background-color: #00aaff;
   color: white;
 }
 

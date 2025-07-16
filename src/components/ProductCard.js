@@ -9,7 +9,7 @@ const ProductCard = React.memo(({ product, addToCart }) => {
   return (
     <div className="product-card">
       <img
-        src={product.image || "https://via.placeholder.com/150x150?text=No+Image"}
+        src={product.image || "https://via.placeholder.com/1500x1500?text=No+Image"}
         alt={product.name}
         onError={handleImgError}
       />
