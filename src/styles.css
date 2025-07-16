@@ -29,9 +29,11 @@ header {
 /* الشريط العلوي */
 .top-bar {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
   background-color: #eaeaea;
   padding: 10px;
 }
@@ -43,13 +45,44 @@ header {
   padding: 8px 25px;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 15px;
+  flex-shrink: 0;
 }
 
 .top-bar #searchInput {
   flex: 1;
-  padding: 8px;
+  min-width: 180px;
+  max-width: 2000px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 16px;
+}
+
+
+/* الفئات داخل الشريط العلوي */
+.category-list {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 5px 0;
+  width: 100%;
+}
+
+.category-item {
+  padding: 6px 12px;
+  background-color: #eee;
+  border: none;
+  border-radius: 4px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 14px;
+}
+
+.category-item.active {
+  background-color: #007bff;
+  color: white;
 }
 
 /* الحاوية الرئيسية */
@@ -234,7 +267,7 @@ header {
 }
 
 .add-to-cart {
-  background: linear-gradient(90deg, #c42e00, #ff6f00); /* من الأحمر البرتقالي لـ برتقالي أفتح */
+  background: linear-gradient(90deg, #c42e00, #ff6f00);
   border: none;
   color: white;
   padding: 1px 20px;
@@ -246,44 +279,10 @@ header {
 }
 
 .add-to-cart:hover {
-  background: linear-gradient(90deg, #09729b, #00aaff); /* من أزرق غامق لأزرق فاتح */
+  background: linear-gradient(90deg, #09729b, #00aaff);
 }
 
-
-/* القائمة الجانبية للفئات */
+/* القائمة الجانبية للفئات (لم تعد مستخدمة بعد التعديل) */
 .category-menu {
-  position: fixed;
-  top: 180px;
-  left: 0;
-  width: 150px;
-  height: calc(50% - 70px);
-  background-color: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-  z-index: 9999;
-  overflow-y: auto;
-  direction: rtl;
-}
-
-.category-menu.show {
-  transform: translateX(0);
-}
-
-.category-menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.category-menu li {
-  padding: 12px 16px;
-  border-bottom: 2px solid #ddd;
-  text-align: right;
-  cursor: pointer;
-  font-size: 17px;
-}
-
-.category-menu li:hover {
-  background-color: #f0f0f0;
+  display: none;
 }

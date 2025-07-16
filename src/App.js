@@ -1,8 +1,6 @@
-// App.js
 import React, { useState, useEffect } from "react";
 import Header from "./components/Header.js";
 import TopBar from "./components/TopBar.js";
-import CategoryMenu from "./components/CategoryMenu.js";
 import CartIcon from "./components/CartIcon.js";
 import Cart from "./components/Cart.js";
 import ProductGrid from "./components/ProductGrid.js";
@@ -95,8 +93,6 @@ function App() {
     function handleClickOutside(event) {
       const cartEl = document.getElementById("cart");
       const cartIconEl = document.getElementById("cartIcon");
-      const categoryMenuEl = document.getElementById("categoryMenu");
-      const categoryBtnEl = document.getElementById("categoryBtn");
 
       if (
         cartEl &&
@@ -106,16 +102,8 @@ function App() {
       ) {
         setCartVisible(false);
       }
-
-      if (
-        categoryMenuEl &&
-        categoryBtnEl &&
-        !categoryMenuEl.contains(event.target) &&
-        !categoryBtnEl.contains(event.target)
-      ) {
-        setCategoryMenuVisible(false);
-      }
     }
+
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
@@ -127,6 +115,10 @@ function App() {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         toggleCategoryMenu={() => setCategoryMenuVisible(!categoryMenuVisible)}
+        categoryMenuVisible={categoryMenuVisible}
+        categories={categories}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
       />
       <div className="container">
         <CartIcon cart={cart} toggleCart={() => setCartVisible(!cartVisible)} />
@@ -136,13 +128,6 @@ function App() {
           totalPrice={totalPrice}
           updateCartItem={updateCartItem}
           orderViaWhatsApp={orderViaWhatsApp}
-        />
-        <CategoryMenu
-          visible={categoryMenuVisible}
-          categories={categories}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          hideMenu={() => setCategoryMenuVisible(false)}
         />
         <ProductGrid products={filteredProducts} addToCart={addToCart} />
       </div>

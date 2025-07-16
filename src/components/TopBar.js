@@ -1,4 +1,12 @@
-const TopBar = ({ searchTerm, setSearchTerm, toggleCategoryMenu }) => (
+const TopBar = ({
+  searchTerm,
+  setSearchTerm,
+  toggleCategoryMenu,
+  categoryMenuVisible,
+  categories,
+  selectedCategory,
+  setSelectedCategory
+}) => (
   <nav className="top-bar">
     <button id="categoryBtn" onClick={toggleCategoryMenu}>الفئات</button>
     <input
@@ -8,6 +16,19 @@ const TopBar = ({ searchTerm, setSearchTerm, toggleCategoryMenu }) => (
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
     />
+    {categoryMenuVisible && (
+      <div className="category-list">
+        {["All items", ...categories].map((category) => (
+          <button
+            key={category}
+            className={`category-item ${selectedCategory === category ? "active" : ""}`}
+            onClick={() => setSelectedCategory(category)}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+    )}
   </nav>
 );
 
