@@ -76,7 +76,7 @@ header {
   border-radius: 4px;
   white-space: nowrap;
   cursor: pointer;
-  transition: background-color 0.7s;
+  transition: background-color 0.2s;
   font-size: 14px;
 }
 
