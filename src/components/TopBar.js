@@ -1,23 +1,20 @@
-import { useMemo } from "react";
-
-// كل روابط الصور الـ 15 التي زودتني بها
-const sampleImages = [
-  "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1749493117/Oulmes_classic_33cl_x12_dqumoo.webp",
-  "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1749493117/Oulmes_mjito_33cl_x12_fn9frc.webp",
-  "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1749493117/Oulmes_orange_33cl_x12_z4mciq.webp",
-  "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1747994490/ciel_0_5l_12_dcksqe.webp",
-  "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1748430076/ain_atlas_33cl_x12_hdcr3o.webp",
-  "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1748430030/ain_saiss_33cl_x12_leejqc.webp",
-  "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1748430053/sidi_ali_33cl_x12_cgwgfo.webp",
-  "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1748430076/ain_atlas_50cl_x12_emlx9v.webp",
-  "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1748430050/ain_ifrane_50cl_x12_k2rzg9.webp",
-  "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1749493117/Ain_sais_d%C3%A9lice_50cl_x12_br8w9e.webp",
-  "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1748430030/ain_saiss_50cl_x12_cmcngp.webp",
-  "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1748430101/aquafina_50cl_x12_ddxszq.webp",
-  "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1748430061/oulmes_50cl_x12_r43vwj.webp",
-  "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1748430182/sidi_ali_50cl_x12_t2ouwz.webp",
-  "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1748430062/sidi_harazem_50cl_x12_aplcci.webp"
-];
+const categoryImageMap = {
+  "All items": "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1753186452/all_items_zxuuoo.webp",
+  "مياه ومشروبات": "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1753186435/%D9%85%D9%8A%D8%A7%D9%87_%D9%88_%D9%85%D8%B4%D8%B1%D9%88%D8%A8%D8%A7%D8%AA_h1g7cd.webp",
+  "جبن والبان": "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1753186450/%D8%AC%D8%A8%D9%86_%D9%88_%D8%A7%D9%84%D8%A8%D8%A7%D9%86_dsg8te.webp",
+  "صلصات ومربى": "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1753186436/%D8%B5%D9%84%D8%B5%D8%A7%D8%AA_%D9%88%D9%85%D8%B1%D8%A8%D9%89_f538hd.webp",
+  "زيوت": "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1753186436/%D8%B2%D9%8A%D9%88%D8%AA_nboqiy.webp",
+  "منضفات": "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1753186435/%D9%85%D9%86%D8%B6%D9%81%D8%A7%D8%AA_g6oper.webp",
+  "عجائن ودقيق": "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1753186435/%D8%B9%D8%AC%D8%A7%D8%A6%D9%86_%D9%88%D8%AF%D9%82%D9%8A%D9%82_dpysvw.webp",
+  "بسكوي - مقرمشات": "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1753186451/%D8%A8%D8%B3%D9%83%D9%88%D9%8A_-_%D9%85%D9%82%D8%B1%D9%85%D8%B4%D8%A7%D8%AA_ngznjv.webp",
+  "خمائر وشوكولاته": "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1753186450/%D8%AE%D9%85%D8%A7%D8%A6%D8%B1_%D9%88%D8%B4%D9%88%D9%83%D9%88%D9%84%D8%A7%D8%AA%D9%87_s8iyvy.webp",
+  "معلبات اسماك ولحوم": "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1753186435/%D9%85%D8%B9%D9%84%D8%A8%D8%A7%D8%AA_%D8%A7%D8%B3%D9%85%D8%A7%D9%83_%D9%88%D9%84%D8%AD%D9%88%D9%85_fezga4.webp",
+  "سكر وشاي قهوه": "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1753186436/%D8%B3%D9%83%D8%B1_%D9%88%D8%B4%D8%A7%D9%8A_%D9%82%D9%87%D9%88%D9%87_iqsph3.webp",
+  "مناديل وحفاضات": "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1753186435/%D9%85%D9%86%D8%A7%D8%AF%D9%8A%D9%84_%D9%88%D8%AD%D9%81%D8%A7%D8%B6%D8%A7%D8%AA_cmv0oo.webp",
+  "فواكه مجففه وبقوليات": "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1753186435/%D9%81%D9%88%D8%A7%D9%83%D9%87_%D9%85%D8%AC%D9%81%D9%81%D9%87_%D9%88%D8%A8%D9%82%D9%88%D9%84%D9%8A%D8%A7%D8%AA_kkylmb.webp",
+  "توابل وبهارات": "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1753186451/%D8%AA%D9%88%D8%A7%D8%A8%D9%84_%D9%88%D8%A8%D9%87%D8%A7%D8%B1%D8%A7%D8%AA_lz0typ.webp",
+  "اغراض منزليه": "https://res.cloudinary.com/dtfd1qbbi/image/upload/v1753186451/%D8%A7%D8%BA%D8%B1%D8%A7%D8%B6_%D9%85%D9%86%D8%B2%D9%84%D9%8A%D9%87_bknlvy.webp"
+};
 
 const TopBar = ({
   searchTerm,
@@ -27,46 +24,35 @@ const TopBar = ({
   categories,
   selectedCategory,
   setSelectedCategory
-}) => {
-  const categoryImages = useMemo(() => {
-    const shuffled = [...sampleImages].sort(() => 0.5 - Math.random());
-    const result = {};
-    ["All items", ...categories].forEach((cat, i) => {
-      result[cat] = shuffled[i % shuffled.length];
-    });
-    return result;
-  }, [categories]);
-
-  return (
-    <nav className="top-bar">
-      <button id="categoryBtn" onClick={toggleCategoryMenu}>الفئات</button>
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="ابحث عن المنتجات..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      {categoryMenuVisible && (
-        <div className="category-list with-images">
-          {["All items", ...categories].map((category) => (
-            <button
-              key={category}
-              className={`category-item ${selectedCategory === category ? "active" : ""}`}
-              onClick={() => setSelectedCategory(category)}
-            >
-              <img
-                src={categoryImages[category]}
-                alt={category}
-                className="category-image"
-              />
-              <span>{category}</span>
-            </button>
-          ))}
-        </div>
-      )}
-    </nav>
-  );
-};
+}) => (
+  <nav className="top-bar">
+    <button id="categoryBtn" onClick={toggleCategoryMenu}>الفئات</button>
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="ابحث عن المنتجات..."
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+    />
+    {categoryMenuVisible && (
+      <div className="category-list with-images">
+        {["All items", ...categories].map((category) => (
+          <button
+            key={category}
+            className={`category-item ${selectedCategory === category ? "active" : ""}`}
+            onClick={() => setSelectedCategory(category)}
+          >
+            <img
+              src={categoryImageMap[category] || ""}
+              alt={category}
+              className="category-image"
+            />
+            <span>{category}</span>
+          </button>
+        ))}
+      </div>
+    )}
+  </nav>
+);
 
 export default TopBar;
