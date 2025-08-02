@@ -4,7 +4,7 @@ import TopBar from "./components/TopBar.js";
 import CartIcon from "./components/CartIcon.js";
 import Cart from "./components/Cart.js";
 import ProductGrid from "./components/ProductGrid.js";
-import { parseCSV, formatWhatsAppMessage } from "./components/helpers.js";
+import { formatWhatsAppMessage } from "./components/helpers.js";
 import "./styles.css";
 
 function App() {
@@ -17,18 +17,23 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState("All items");
 
   useEffect(() => {
-    fetch("/products.csv")
-      .then((res) => res.text())
+    fetch("/products.json")
+      .then((res) => res.json())
       .then((data) => {
-        const prods = parseCSV(data);
-        setProducts(prods);
-        const cats = [...new Set(prods.map((p) => p.category.trim()).filter(c => c !== ""))];
+        // نحول المفاتيح إلى الشكل المناسب
+        const normalized = data.map(item => ({
+          name: item.Name || "",
+          price: parseFloat(item.Price) || 0,
+          image: item.Image || "",
+          category: item.Category || ""
+        }));
+        setProducts(normalized);
+        const cats = [...new Set(normalized.map((p) => p.category.trim()).filter(c => c !== ""))];
         setCategories(cats);
       })
-      .catch((err) => console.error("Failed to load CSV:", err));
+      .catch((err) => console.error("Failed to load JSON:", err));
   }, []);
 
-  // استخدم useMemo لتقليل عمليات الفلترة الثقيلة
   const filteredProducts = useMemo(() => {
     let filtered = products;
     if (selectedCategory !== "All items") {
@@ -42,7 +47,6 @@ function App() {
     return filtered;
   }, [products, selectedCategory, searchTerm]);
 
-  // دوال cart محسنة باستخدام useCallback لتجنب إعادة إنشائها
   const addToCart = useCallback((product) => {
     setCart((prevCart) => {
       const newCart = { ...prevCart };
