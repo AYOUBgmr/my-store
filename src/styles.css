@@ -311,7 +311,7 @@ background: linear-gradient(90deg, #022038, #0084ab);
 @media (max-width: 768px) {
   .add-to-cart {
     width: 95%;
-    font-size: 13px;
-    padding: 3px 0;
+    font-size: 15px;
+    padding: 4px 0;
   }
 }
