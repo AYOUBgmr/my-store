@@ -249,7 +249,7 @@ background: linear-gradient(90deg, #022038, #0084ab);
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;
-  padding: 1px;
+  padding: 0.1px;
   transition: box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
@@ -310,8 +310,8 @@ background: linear-gradient(90deg, #022038, #0084ab);
 /* زر Add to Cart في الموبايل */
 @media (max-width: 768px) {
   .add-to-cart {
-    width: 80%;
+    width: 95%;
     font-size: 13px;
-    padding: 6px 0;
+    padding: 3px 0;
   }
 }
