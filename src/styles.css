@@ -39,17 +39,17 @@ header {
 }
 
 .top-bar #categoryBtn {
-background: linear-gradient(90deg, #ff5500, #ff9100);
+background: linear-gradient(90deg, #022038, #0084ab);
   color: #fff;
   border: none;
-  padding: 8px 15px;
+  padding: 10px 8px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 15px;
   flex-shrink: 0;
 }
 .top-bar #categoryBtn:hover {
-  background: linear-gradient(90deg, #022038, #0084ab);
+  background: linear-gradient(90deg, #ff5500, #ff9100);
   transform: scale(1.05);
   }
 .top-bar #searchInput {
@@ -59,7 +59,7 @@ background: linear-gradient(90deg, #ff5500, #ff9100);
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 /* قائمة الفئات بالصور */
@@ -203,7 +203,7 @@ background: linear-gradient(90deg, #ff5500, #ff9100);
 }
 
 .cart button {
-  background-color: #fd3d03;
+  background: linear-gradient(90deg, #ff5500, #ff9100);
   border: none;
   color: #fff;
   padding: 8px 12px;
@@ -212,7 +212,7 @@ background: linear-gradient(90deg, #ff5500, #ff9100);
 }
 
 .cart button:hover {
-  background-color: #18dc28;
+  background: linear-gradient(90deg, #022038, #0084ab);
 }
 
 /* شبكة عرض المنتجات */
