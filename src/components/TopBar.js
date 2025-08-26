@@ -26,7 +26,7 @@ const TopBar = ({
   setSelectedCategory
 }) => (
   <nav className="top-bar">
-    <button id="categoryBtn" onClick={toggleCategoryMenu}>الفئات</button>
+    <button id="categoryBtn" onClick={toggleCategoryMenu}>categories</button>
     <input
       type="text"
       id="searchInput"
