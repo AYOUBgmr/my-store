@@ -16,7 +16,7 @@ const ProductCard = React.memo(({ product, addToCart }) => {
       <h3>{product.name}</h3>
       <p>{product.price} dh</p>
       <button className="add-to-cart" onClick={() => addToCart(product)}>
-       أضف لسلة
+       add to cart 
       </button>
     </div>
   );
