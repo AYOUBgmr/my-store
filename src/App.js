@@ -16,28 +16,48 @@ function App() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All items");
 
+  // تحميل المنتجات
   useEffect(() => {
     fetch("/products.json")
       .then((res) => res.json())
       .then((data) => {
-        // نحول المفاتيح إلى الشكل المناسب
-        const normalized = data.map(item => ({
+        const normalized = data.map((item) => ({
           name: item.Name || "",
           price: parseFloat(item.Price) || 0,
           image: item.Image || "",
-          category: item.Category || ""
+          category: item.Category || "",
+          instock: (() => {
+            if (typeof item.inStock === "boolean") return item.inStock;
+            if (typeof item.inStock === "string") {
+              const val = item.inStock.trim().toLowerCase();
+              return val === "true" || val === "1";
+            }
+            if (typeof item.inStock === "number") {
+              return item.inStock !== 0;
+            }
+            return false;
+          })(),
         }));
+
         setProducts(normalized);
-        const cats = [...new Set(normalized.map((p) => p.category.trim()).filter(c => c !== ""))];
+
+        const cats = [
+          ...new Set(
+            normalized.map((p) => p.category.trim()).filter((c) => c !== "")
+          ),
+        ];
         setCategories(cats);
       })
       .catch((err) => console.error("Failed to load JSON:", err));
   }, []);
 
+  // فلترة المنتجات
   const filteredProducts = useMemo(() => {
     let filtered = products;
     if (selectedCategory !== "All items") {
-      filtered = filtered.filter((p) => p.category.trim() === selectedCategory);
+      filtered = filtered.filter(
+        (p) => p.category.trim() === selectedCategory
+      );
     }
     if (searchTerm.trim() !== "") {
       filtered = filtered.filter((p) =>
@@ -47,6 +67,7 @@ function App() {
     return filtered;
   }, [products, selectedCategory, searchTerm]);
 
+  // إضافة منتج للسلة
   const addToCart = useCallback((product) => {
     setCart((prevCart) => {
       const newCart = { ...prevCart };
@@ -59,6 +80,7 @@ function App() {
     });
   }, []);
 
+  // تحديث عنصر في السلة
   const updateCartItem = useCallback((name, action) => {
     setCart((prevCart) => {
       const newCart = { ...prevCart };
@@ -78,12 +100,17 @@ function App() {
     });
   }, []);
 
-  const totalPrice = useMemo(() =>
-    Object.entries(cart).reduce(
-      (sum, [_, item]) => sum + item.price * item.quantity,
-      0
-    ), [cart]);
+  // حساب السعر الكلي
+  const totalPrice = useMemo(
+    () =>
+      Object.entries(cart).reduce(
+        (sum, [_, item]) => sum + item.price * item.quantity,
+        0
+      ),
+    [cart]
+  );
 
+  // الطلب عبر WhatsApp
   const orderViaWhatsApp = useCallback(() => {
     if (Object.keys(cart).length === 0) {
       alert("السلة فارغة!");
@@ -94,6 +121,7 @@ function App() {
     window.open(url, "_blank");
   }, [cart, totalPrice]);
 
+  // إخفاء السلة عند النقر خارجها
   useEffect(() => {
     function handleClickOutside(event) {
       const cartEl = document.getElementById("cart");

@@ -39,7 +39,7 @@ header {
 }
 
 .top-bar #categoryBtn {
-background: linear-gradient(90deg, #022038, #0084ab);
+  background: linear-gradient(90deg, #022038, #0084ab);
   color: #fff;
   border: none;
   padding: 10px 8px;
@@ -51,7 +51,7 @@ background: linear-gradient(90deg, #022038, #0084ab);
 .top-bar #categoryBtn:hover {
   background: linear-gradient(90deg, #ff5500, #ff9100);
   transform: scale(1.05);
-  }
+}
 .top-bar #searchInput {
   flex: 1;
   min-width: 180px;
@@ -314,4 +314,25 @@ background: linear-gradient(90deg, #022038, #0084ab);
     font-size: 15px;
     padding: 2px 0;
   }
+}
+
+/* ✅ حالة المخزون */
+.stock-status {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  padding: 3px 7px;
+  border-radius: 8px;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.stock-status.in {
+  color: green;
+  background-color: rgba(0, 255, 0, 0.1);
+}
+
+.stock-status.out {
+  color: red;
+  background-color: rgba(255, 0, 0, 0.1);
 }
