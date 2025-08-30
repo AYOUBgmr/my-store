@@ -39,7 +39,7 @@ header {
 }
 
 .top-bar #categoryBtn {
-  background: linear-gradient(90deg, #022038, #0084ab);
+  background: linear-gradient(90deg, #ff5500, #ff9100);
   color: #fff;
   border: none;
   padding: 10px 8px;
@@ -49,7 +49,7 @@ header {
   flex-shrink: 0;
 }
 .top-bar #categoryBtn:hover {
-  background: linear-gradient(90deg, #ff5500, #ff9100);
+  background: linear-gradient(90deg, #022038, #0084ab);
   transform: scale(1.05);
 }
 .top-bar #searchInput {
@@ -230,7 +230,7 @@ header {
   }
 
   .product-card h3 {
-    font-size: 14px;
+    font-size: 12px;
   }
 }
 
@@ -241,7 +241,7 @@ header {
   }
 
   .product-card h3 {
-    font-size: 13px;
+    font-size: 12px;
   }
 }
 
@@ -280,7 +280,7 @@ header {
 }
 
 .product-card p {
-  font-size: 18px;
+  font-size: 15px;
   margin: 1px 0;
 }
 
@@ -311,7 +311,7 @@ header {
 @media (max-width: 768px) {
   .add-to-cart {
     width: 95%;
-    font-size: 15px;
+    font-size: 12px;
     padding: 2px 0;
   }
 }
@@ -321,7 +321,7 @@ header {
   position: absolute;
   top: 2px;
   left: 2px;
-  padding: 3px 7px;
+  padding: 1px 4px;
   border-radius: 8px;
   font-size: 9px;
   font-weight: bold;
